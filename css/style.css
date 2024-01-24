@@ -18,12 +18,12 @@ main .contenedor_principal .contenedor_login {
   gap: 12px;
   display: flex;
   flex-direction: column;
-  font-family: Gotham-Medium, sans-serif;
-  font-size: 18px;
-  color: black;
-  font-weight: bold;
   text-align: center;
   justify-content: center;
+  font-family: Gotham-Medium, sans-serif;
+  font-size: 25px;
+  color: black;
+  font-weight: bold;
   border-radius: 14px;
   background: rgb(248, 193, 28);
   outline: 2px solid transparent;
@@ -44,7 +44,7 @@ main .contenedor_principal .contenedor_login input {
   padding-left: 5px;
   margin-left: 50px;
   margin-right: 50px;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 main .contenedor_principal .contenedor_login .boton {
   margin-top: 25px;
@@ -57,6 +57,7 @@ main .contenedor_principal .contenedor_login .boton {
   font-size: 18px;
   color: black;
   font-weight: bold;
+  border-radius: 8px;
 }
 
 .cuerpo_login {
@@ -116,6 +117,7 @@ main .contenedor_principal .contenedor_login .boton {
 #main_cursos .main_divisor {
   width: 100%;
   height: 35px;
+  margin-top: 100px;
 }
 #main_cursos .main_divisor h1 {
   font-family: Gotham-Medium, sans-serif;
@@ -335,6 +337,66 @@ main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_
   color: black;
   font-size: 20px;
   margin-top: 20px;
+}
+main .contenedor_principal_pago {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+main .contenedor_principal_pago .contenedor_principal_pago_datos {
+  width: 800px;
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 15px;
+  justify-content: center;
+  font-family: Gotham-Medium, sans-serif;
+  font-size: 25px;
+  color: black;
+  font-weight: bold;
+  border-radius: 14px;
+  background: rgb(248, 193, 28);
+  outline: 2px solid transparent;
+  box-shadow: 0 3px 17px rgba(0, 0, 0, 0.1);
+  transition: 0.25s;
+}
+main .contenedor_principal_pago .contenedor_principal_pago_datos .contenedor_principal_pago_datos_separador {
+  display: flex;
+  justify-content: space-between;
+}
+main .contenedor_principal_pago .contenedor_principal_pago_datos:hover {
+  outline-color: rgb(0, 3, 5);
+  box-shadow: 2px 2px 2px rgb(13, 14, 14);
+}
+main .contenedor_principal_pago .contenedor_principal_pago_datos label {
+  margin-top: 20px;
+}
+main .contenedor_principal_pago .contenedor_principal_pago_datos input {
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-radius: 8px;
+}
+main .contenedor_principal_pago .contenedor_principal_pago_datos .boton {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-family: Gotham-Medium, sans-serif;
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
 main .main_agregar_cursos {

@@ -16,6 +16,7 @@
             <ul>
                 <li><a href="cursos.html">Cursos</a></li>  
                 <li id="el_carrito"><a href="#">Carrito</a></li>
+                <li id="logout"><a href="#">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -31,7 +32,31 @@
                 <section id = "contenedor" class="main_disenno_flex_bloques">
                 </section>
             </section>
-        </section>    
+        </section>  
+        <div class="main_slogan">
+            <h1>Para pagar su compra debe hacer una transferencia y enviar el comprobante</h1>
+        </div>            
+        <div class="contenedor_principal_pago">
+            <div class="contenedor_principal_pago_datos">
+                <div class="contenedor_principal_pago_datos_separador">
+                    <label>Cuenta Bancaria</label>
+                    <label>Santander</label>
+                    <label id="total">002232145789</label>
+                </div>
+                <div class="contenedor_principal_pago_datos_separador">
+                    <label>Total a pagar</label>
+                    <label>UYU</label>
+                    <label id="total">bbb</label>
+                </div>
+                <div class="contenedor_principal_pago_datos_separador">
+                    <label>Comprobante de pago</label>
+                    <input id="comprobante" type="file">
+                </div>
+                <div class="boton">
+                    <button id="boton_login" class="boton">Enviar Comprobante</button>
+                </div>                
+            </div>            
+        </div>  
     </main>
     <footer></footer>
     <script src="../carrito.js"></script>

@@ -108,4 +108,73 @@ main{
             }
         }
     }
+
+    .contenedor_principal_pago{ 
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        text-align: center;
+        justify-content: center;        
+
+        .contenedor_principal_pago_datos{
+            width: 800px;
+
+            gap: 12px;            
+            display: flex;
+            flex-direction: column;            
+            text-align: start;
+            padding: 15px;
+            justify-content: center;  
+            font-family: Gotham-Medium,sans-serif;
+            font-size: 25px;
+            color: black;
+            font-weight: bold;
+            border-radius: 14px;
+            background: rgb(248,193,28);
+            outline: 2px solid transparent;
+            box-shadow: 0 3px 17px rgba(0,0,0,.1);
+            transition: .25s;
+
+            .contenedor_principal_pago_datos_separador{
+                display: flex;            
+                justify-content: space-between; 
+            }
+
+            &:hover{
+                outline-color: rgb(0, 3, 5);
+                box-shadow: 2px 2px 2px rgb(13, 14, 14);
+            }
+
+            label{
+                margin-top: 20px;                
+            }
+
+            input{
+                padding-top: 15px;
+                padding-bottom: 5px;
+                padding-right: 5px;
+                padding-left: 5px;
+                margin-left: 50px;
+                margin-right: 50px;
+                border-radius: 8px;                
+            }
+
+            .boton{
+                margin-top: auto;
+                margin-bottom: auto;
+                //margin-right: 0px;
+                margin-left: auto;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-right: 20px;
+                padding-left: 20px;
+                font-family: Gotham-Medium,sans-serif;
+                font-size:18px;
+                color: black;
+                font-weight: bold;
+                border-radius: 5px; 
+            }
+        }
+    }
 }

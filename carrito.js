@@ -30,6 +30,24 @@ function leerLocalStorage(){
     });
 }
 
+/*===========================================================*/
+/*=====MANDO A EJECUTARSE LA FUNCIÓN AL ABRIRSE LA PÁGINA====*/
+/*===========================================================*/
 
-//mando a ejecutarse la funcion al abrirse la página
 window.onload = leerLocalStorage();
+/*===========================================*/
+/*===========================================*/
+/*===========================================*/
+
+
+
+//ESTO ES PARA DESLOGUEAR
+
+const desloguear=()=>{
+    localStorage.clear();
+    window.open("../index.html");
+}
+
+const logout = document.getElementById("logout");
+
+logout.addEventListener("click", () => desloguear());
