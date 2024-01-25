@@ -75,11 +75,20 @@ const cargarPagina = () =>{
 
 //AGREGAR AL CARRITO
 
-
+//FUNCION PARA ABREVIATURA DE CURSOS PARA EL CARRITO
 function Curso(pnombre_curso, pimagen, pprecio){
     this.nombre_curso = pnombre_curso,
     this.imagen = pimagen,
     this.precio = pprecio
+}
+
+//FUNCION PARA CREAR CURSOS
+function Curso(id, imagen, nombre, descripcion, precio){
+    this.id = id;
+    this.imagen = imagen;
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    this.precio = precio;
 }
 
 let carrito=[];
@@ -88,8 +97,7 @@ function agregarAlCarrito(id){
     for (const iterator of mis_cursos) {
         if (iterator.id == id) {
             console.log(iterator.imagen);
-            let elCurso = new Curso(iterator.nombre, iterator.imagen, iterator.precio);
-            carrito.push(elCurso)
+            carrito.push(iterator)
         }        
     }
     
@@ -109,17 +117,6 @@ const escucharBotones =() =>{
 window.onload = cargarPagina();
 
 
-
-
-
-
-
-
-
-//boton_agregar_al_carrito.addEventListener("click", ()=>console.log("lala"));
-// boton_agregar_al_carrito.addEventListener("click", () => agregarAlCarrito(document.getElementById("curso_id"), document.getElementById("nombre_del_curso").innerHTML, document.getElementById("imagen_del_curso").src,  document.getElementById("precio_del_curso").innerHTML));
-
-
 //ESTO ES PARA AGREGAR NUEVOS CURSOS
 
 function agregarCurso(){
@@ -133,13 +130,19 @@ function agregarCurso(){
     let la_imagen_del_curso = getNombreDeimagen();
 
     console.log(el_nombre_del_curso, el_precio_del_curso, la_descripcion_del_curso, la_imagen_del_curso);
-    let contenedor = document.getElementById("contenedor_de_tarjetas");
+    let nuevo_id = mis_cursos.length + 1;
+    let nuevo_curso = new Curso(nuevo_id, la_imagen_del_curso, el_nombre_del_curso, la_descripcion_del_curso, el_precio_del_curso);
+    mis_cursos.push(nuevo_curso);
+    console.log(nuevo_curso);
+    console.log(mis_cursos);
+
+    let contenedor = document.getElementById("contenedor_cursos_precargados");
     
     let div = document.createElement("div");
         div.innerHTML = 
         `<div class="main_disenno_flex_bloques_tarjetas">
         <figure class="main_disenno_flex_bloques_figure">
-            <img src="../images/cursos_para_cargar/${la_imagen_del_curso}" alt=${la_imagen_del_curso}>
+            <img src="../images/cursos_precargados/${la_imagen_del_curso}" alt=${la_imagen_del_curso}>
         </figure>
         <div class="main_disenno_flex_bloques_textos_h1">
             <h1>${el_nombre_del_curso}</h1>
@@ -153,14 +156,14 @@ function agregarCurso(){
             </div>
         </article>
         <div class="main_disenno_flex_bloques_comprar">
-            <button class="main_disenno_flex_bloques_boton">
+            <button id="${nuevo_id}" class="main_disenno_flex_bloques_boton">
                 <img src="../images/carrito_compras/carrito.png" alt="carrito">
             </button>
         </div>
     </div>`;
         contenedor.append(div);
-
         limpiarDatos();
+        escucharBotones();
 }
 
 function limpiarDatos(){

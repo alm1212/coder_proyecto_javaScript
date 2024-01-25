@@ -12,6 +12,7 @@ function leerLocalStorage(){
         let contenedor = document.getElementById("contenedor");
 
         productos.forEach(element => {
+            console.log(element.precio);
             let div = document.createElement("div");
             div.innerHTML = 
                 `<div id="1" class="main_disenno_flex_bloques_tarjetas">
@@ -19,7 +20,7 @@ function leerLocalStorage(){
                     <img src="../images/cursos_precargados/${element.imagen}" alt=${element.imagen}>
                 </figure>
                 <div class="main_disenno_flex_bloques_textos_h1">
-                    <h1 id="nombre_del_curso">${element.nombre_curso}</h1>
+                    <h1 id="nombre_del_curso">${element.nombre}</h1>
                 </div>
                 <article class="main_disenno_flex_bloques_textos">
                     <div class="main_disenno_flex_bloques_textos_precio">
