@@ -33,27 +33,30 @@
                 </section>
             </section>
         </section>  
-        <div class="main_slogan">
-            <h1>Para pagar su compra debe hacer una transferencia y enviar el comprobante</h1>
-        </div>            
+        <div id="contenedor_carrito_vacio">
+            <div class="main_slogan">
+                <h1>Para pagar su compra debe hacer una transferencia y enviar el comprobante</h1>
+            </div> 
+        </div>                  
         <div class="contenedor_principal_pago">
             <div class="contenedor_principal_pago_datos">
                 <div class="contenedor_principal_pago_datos_separador">
-                    <label>Cuenta Bancaria</label>
-                    <label>Santander</label>
-                    <label id="total">002232145789</label>
+                    <label>Cuenta Bancaria  ---  Santander</label>
+                    <label>002232145789</label>
                 </div>
                 <div class="contenedor_principal_pago_datos_separador">
-                    <label>Total a pagar</label>
-                    <label>UYU</label>
-                    <label id="total">bbb</label>
+                    <label>Total a pagar  --- UYU </label>
+                    <div>
+                        <label>$</label>
+                        <label id="total"></label>
+                    </div>                    
                 </div>
                 <div class="contenedor_principal_pago_datos_separador">
                     <label>Comprobante de pago</label>
-                    <input id="comprobante" type="file">
+                    <input id="comprobante" class="boton" type="file">
                 </div>
                 <div class="boton">
-                    <button id="boton_login" class="boton">Enviar Comprobante</button>
+                    <button id="enviar_comprobante" class="boton">Enviar Comprobante</button>
                 </div>                
             </div>            
         </div>  

@@ -107,6 +107,7 @@ main .contenedor_principal .contenedor_login .boton {
   position: sticky;
   z-index: 2;
   top: 80px;
+  margin-bottom: 10px;
 }
 #main_cursos .main_slogan h1 {
   font-family: Gotham-Medium, sans-serif;
@@ -350,7 +351,7 @@ main .contenedor_principal_pago {
   justify-content: center;
 }
 main .contenedor_principal_pago .contenedor_principal_pago_datos {
-  width: 800px;
+  width: 600px;
   gap: 12px;
   display: flex;
   flex-direction: column;

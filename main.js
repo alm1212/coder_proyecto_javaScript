@@ -1,58 +1,123 @@
-/*
 
-function login_estudiante(){
-    this.usuario = "estudiante@academy.com";
-    this.password = "estudiante";
-    localStorage.setItem("estudiante", JSON.stringify(login_estudiante));
+/*===========================================================================================*/
+/*======================================BASE DE DATOS========================================*/
+/*===========================================================================================*/
+
+const mis_cursos = [
+    /*id, imagen, nombre, descripcion, precio*/
+    {id:1, imagen:"html.webp", nombre:"HTML 5", descripcion:"El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para estructurar y desplegar una página web y sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con viñetas, o imágenes y tablas de datos.", precio:5200},
+    {id:2, imagen:"css.jpg", nombre:"CSS", descripcion:"CSS son las siglas en inglés para «hojas de estilo en cascada» (Cascading Style Sheets). Básicamente, es un lenguaje que maneja el diseño y presentación de las páginas web, es decir, cómo lucen cuando un usuario las visita. Funciona junto con el lenguaje HTML que se encarga del contenido básico de los sitios.", precio:4100},
+    {id:3, imagen:"javascript.jpg", nombre:"JAVASCRIPT", descripcion:"JavaScript es un lenguaje de programación que los desarrolladores utilizan para hacer páginas web interactivas. Desde actualizar fuentes de redes sociales a mostrar animaciones y mapas interactivos, las funciones de JavaScript pueden mejorar la experiencia del usuario de un sitio web.", precio:3200},
+    {id:4, imagen:"react.png", nombre:"REACT", descripcion:"React (también llamada React. js o ReactJS) es una librería Javascript de código abierto diseñada para crear interfaces de usuario con el objetivo de facilitar el desarrollo de aplicaciones en una sola página. Es mantenido por Facebook y la comunidad de software libre.", precio:4500},
+]
+
+
+
+/*===========================================================================================*/
+/*==============================TERMINA BASE DE DATOS========================================*/
+/*===========================================================================================*/
+//MANDO A EJECUTARSE LA FUNCION AL ABRIRSE LA PÁGINA
+//FUNCIÓN PARA CARGAR LOS CURSOS DESDE LA BASE DE DATOS
+
+const cargarCursos = () =>{
+
+    let aumento=1;
+    let contenedor = document.getElementById("contenedor_cursos_precargados");
+        mis_cursos.forEach((element) => {
+            let div = document.createElement("div");
+            div.innerHTML = 
+            `<div class="main_disenno_flex_bloques_tarjetas">
+                <figure class="main_disenno_flex_bloques_figure">
+                    <img src="../images/cursos_precargados/${element.imagen}" alt=${element.imagen}>
+                </figure>
+            <div class="main_disenno_flex_bloques_textos_h1">
+                <h1>${element.nombre}</h1>
+                <p id="curso_id" class="el_id">${element.id}</p>
+            </div>
+            <article class="main_disenno_flex_bloques_textos">
+                <p><br>${element.descripcion}</p>
+                <div class="main_disenno_flex_bloques_textos_precio">
+                    <h1><br>UYU</h1>
+                    <h1 class="main_disenno_flex_bloques_textos_precio_valor"><br>${element.precio}</h1>
+                </div>
+            </article>
+            <div class="main_disenno_flex_bloques_comprar">
+                <button id="${element.id}" class="main_disenno_flex_bloques_boton">
+                    <img src="../images/carrito_compras/carrito.png" alt="carrito">
+                </button>
+            </div>
+        </div>`;
+            contenedor.append(div);
+        })
 }
 
-function login_administrador(){
-    this.usuario = "administrador@academy.com";
-    this.password = "administrador";
-    localStorage.setItem("estudiante", JSON.stringify(login_administrador));
-}
+//ESTO ES PARA OCULTAR LA SECCIÓN DE AGREGAR CURSO SI NO ESTÁ EL ADMINISTRADOR LOGUEADO
 
+const verificarLogin = () =>{
+    const usuario = localStorage.getItem("el_usuario");
+    if (usuario === "estudiante") {
 
-let usuario = document.getElementById("email").value;
-let password = document.getElementById("password").value;
-
-
-function loguear(usuario, password){
-    if(usuario === "estudiante@academy.com" && password === "estudiante" ){
-        window.open("https://www.google.com/");
-        //window.open("pages/cursos.html", "_self");
+        document.getElementById("agregar_cursos1").style.display = 'none';
+        document.getElementById("agregar_cursos2").style.display = 'none';
+        
+    } else {
+        console.log("ok");
     }
-    console.log(usuario);
+}
+const cargarPagina = () =>{
+    console.log("entró");
+    verificarLogin();
+    cargarCursos();
+    escucharBotones();
 }
 
-//window.onload = console.log(usuario);
-let boton_login = document.getElementById("boton_login");
-boton_login.addEventListener("click", () => loguear("estudiante@academy.com", "estudiante"));
-*/
-
+//ESTO ES PARA AGREGAR UN ELEMENTO AL CARRITO
 
 //AGREGAR AL CARRITO
 
+
 function Curso(pnombre_curso, pimagen, pprecio){
     this.nombre_curso = pnombre_curso,
-    this.dimagen = pimagen,
+    this.imagen = pimagen,
     this.precio = pprecio
 }
 
 let carrito=[];
-function agregarAlCarrito(pnombre_curso, pimagen, pprecio){
-
-    let elCurso = new Curso(pnombre_curso, pimagen, pprecio);
-    carrito.push(elCurso);
-    //console.log(elCurso);
-    console.log(carrito);
-
+function agregarAlCarrito(id){
+    
+    for (const iterator of mis_cursos) {
+        if (iterator.id == id) {
+            console.log(iterator.imagen);
+            let elCurso = new Curso(iterator.nombre, iterator.imagen, iterator.precio);
+            carrito.push(elCurso)
+        }        
+    }
+    
     localStorage.setItem("carrito", JSON.stringify(carrito));   
 }
 
-//ESTO ES PARA AGREGAR UN ELEMENTO AL CARRITO
-let boton_agregar_al_carrito = document.getElementById("agregar_al_carrito");
-boton_agregar_al_carrito.addEventListener("click", () => agregarAlCarrito(document.getElementById("nombre_del_curso").innerHTML, document.getElementById("imagen_del_curso").src,  document.getElementById("precio_del_curso").innerHTML));
+const escucharBotones =() =>{
+    mis_cursos.forEach((element) =>{
+        let id=element.id;
+        console.log(id);
+        let boton_agregar_al_carrito = document.getElementById(element.id);
+        console.log(boton_agregar_al_carrito.innerHTML);
+        boton_agregar_al_carrito.addEventListener("click", ()=>agregarAlCarrito(element.id));
+    })
+}
+
+window.onload = cargarPagina();
+
+
+
+
+
+
+
+
+
+//boton_agregar_al_carrito.addEventListener("click", ()=>console.log("lala"));
+// boton_agregar_al_carrito.addEventListener("click", () => agregarAlCarrito(document.getElementById("curso_id"), document.getElementById("nombre_del_curso").innerHTML, document.getElementById("imagen_del_curso").src,  document.getElementById("precio_del_curso").innerHTML));
 
 
 //ESTO ES PARA AGREGAR NUEVOS CURSOS
@@ -124,30 +189,20 @@ let boton_agregar_curso = document.getElementById("agregar_curso");
 boton_agregar_curso.addEventListener("click", () => agregarCurso());
 
 
-//ESTO ES PARA OCULTAR LA SECCIÓN DE AGREGAR CURSO SI NO ESTÁ EL ADMINISTRADOR LOGUEADO
 
-const verificarLogin = () =>{
-    const usuario = localStorage.getItem("el_usuario");
-    if (usuario === "estudiante") {
-
-        document.getElementById("agregar_cursos1").style.display = 'none';
-        document.getElementById("agregar_cursos2").style.display = 'none';
-        
-    } else {
-        console.log("ok");
-    }
-}
-
-//MANDO A EJECUTARSE LA FUNCION AL ABRIRSE LA PÁGINA
-window.onload = verificarLogin();
 
 //ESTO ES PARA DESLOGUEAR
 
 const desloguear=()=>{
     localStorage.clear();
-    window.open("../index.html");
+    window.open("../index.html", "_self");
 }
 
 const logout = document.getElementById("logout");
 
 logout.addEventListener("click", () => desloguear());
+
+/*
+    } else {
+       
+    } */
