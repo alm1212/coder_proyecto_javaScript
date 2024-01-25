@@ -3,7 +3,7 @@
 /*======================================BASE DE DATOS========================================*/
 /*===========================================================================================*/
 
-const mis_cursos = [
+let mis_cursos = [
     /*id, imagen, nombre, descripcion, precio*/
     {id:1, imagen:"html.webp", nombre:"HTML 5", descripcion:"El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para estructurar y desplegar una página web y sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con viñetas, o imágenes y tablas de datos.", precio:5200},
     {id:2, imagen:"css.jpg", nombre:"CSS", descripcion:"CSS son las siglas en inglés para «hojas de estilo en cascada» (Cascading Style Sheets). Básicamente, es un lenguaje que maneja el diseño y presentación de las páginas web, es decir, cómo lucen cuando un usuario las visita. Funciona junto con el lenguaje HTML que se encarga del contenido básico de los sitios.", precio:4100},
@@ -20,8 +20,6 @@ const mis_cursos = [
 //FUNCIÓN PARA CARGAR LOS CURSOS DESDE LA BASE DE DATOS
 
 const cargarCursos = () =>{
-
-    let aumento=1;
     let contenedor = document.getElementById("contenedor_cursos_precargados");
         mis_cursos.forEach((element) => {
             let div = document.createElement("div");
@@ -49,7 +47,42 @@ const cargarCursos = () =>{
         </div>`;
             contenedor.append(div);
         })
+        localStorage.setItem("cursos", JSON.stringify(mis_cursos));
 }
+
+const cargarCursosPrecargados = () =>{
+    console.log("hello");
+    let contenedor = document.getElementById("contenedor_cursos_precargados");
+    let cursos_precargados = JSON.parse(localStorage.getItem("cursos"));
+    cursos_precargados.forEach((element) => {
+            let div = document.createElement("div");
+            div.innerHTML = 
+            `<div class="main_disenno_flex_bloques_tarjetas">
+                <figure class="main_disenno_flex_bloques_figure">
+                    <img src="../images/cursos_precargados/${element.imagen}" alt=${element.imagen}>
+                </figure>
+            <div class="main_disenno_flex_bloques_textos_h1">
+                <h1>${element.nombre}</h1>
+                <p id="curso_id" class="el_id">${element.id}</p>
+            </div>
+            <article class="main_disenno_flex_bloques_textos">
+                <p><br>${element.descripcion}</p>
+                <div class="main_disenno_flex_bloques_textos_precio">
+                    <h1><br>UYU</h1>
+                    <h1 class="main_disenno_flex_bloques_textos_precio_valor"><br>${element.precio}</h1>
+                </div>
+            </article>
+            <div class="main_disenno_flex_bloques_comprar">
+                <button id="${element.id}" class="main_disenno_flex_bloques_boton">
+                    <img src="../images/carrito_compras/carrito.png" alt="carrito">
+                </button>
+            </div>
+        </div>`;
+            contenedor.append(div);
+        })
+}
+
+
 
 //ESTO ES PARA OCULTAR LA SECCIÓN DE AGREGAR CURSO SI NO ESTÁ EL ADMINISTRADOR LOGUEADO
 
@@ -62,13 +95,26 @@ const verificarLogin = () =>{
         
     } else {
         console.log("ok");
+        console.log(localStorage.getItem("cursos"));
     }
 }
+
+//ESTO ES LO QUE QUIERO QUE PASE CUANDO SE ABRA LA PÁGINA
+
 const cargarPagina = () =>{
-    console.log("entró");
-    verificarLogin();
-    cargarCursos();
-    escucharBotones();
+
+    if (localStorage.getItem("cursos")) {
+        verificarLogin();
+        mis_cursos = JSON.parse(localStorage.getItem("cursos"));
+        cargarCursosPrecargados();
+        escucharBotones();
+        //variable_para_controlar_carga_de_datos = "b";
+    } else {
+        verificarLogin();
+        cargarCursos();
+        escucharBotones();
+        //variable_para_controlar_carga_de_datos = "b";
+    }   
 }
 
 //ESTO ES PARA AGREGAR UN ELEMENTO AL CARRITO
@@ -91,8 +137,13 @@ function Curso(id, imagen, nombre, descripcion, precio){
     this.precio = precio;
 }
 
-let carrito=[];
+//let carrito=[];
 function agregarAlCarrito(id){
+    
+    let carrito = [];
+    if(localStorage.getItem("carrito")){
+        carrito = JSON.parse(localStorage.getItem("carrito"));
+    }
     
     for (const iterator of mis_cursos) {
         if (iterator.id == id) {
@@ -101,10 +152,15 @@ function agregarAlCarrito(id){
         }        
     }
     
-    localStorage.setItem("carrito", JSON.stringify(carrito));   
+    localStorage.setItem("carrito", JSON.stringify(carrito));  
+    
+    localStorage.setItem("variable_para_abrir", "b");
 }
 
 const escucharBotones =() =>{
+    
+    
+    console.log(mis_cursos);
     mis_cursos.forEach((element) =>{
         let id=element.id;
         console.log(id);
@@ -117,7 +173,13 @@ const escucharBotones =() =>{
 window.onload = cargarPagina();
 
 
-//ESTO ES PARA AGREGAR NUEVOS CURSOS
+//ESTO ES PARA AGREGAR NUEVOS CURSOS A LA ACADEMIA
+
+
+function getNombreDeimagen(){
+    var nombre = document.getElementById('imagen_curso').files[0].name;
+    return nombre;
+}
 
 function agregarCurso(){
 
@@ -129,12 +191,11 @@ function agregarCurso(){
     let la_descripcion_del_curso = document.getElementById("descripcion_curso").value;
     let la_imagen_del_curso = getNombreDeimagen();
 
-    console.log(el_nombre_del_curso, el_precio_del_curso, la_descripcion_del_curso, la_imagen_del_curso);
+    
     let nuevo_id = mis_cursos.length + 1;
     let nuevo_curso = new Curso(nuevo_id, la_imagen_del_curso, el_nombre_del_curso, la_descripcion_del_curso, el_precio_del_curso);
     mis_cursos.push(nuevo_curso);
-    console.log(nuevo_curso);
-    console.log(mis_cursos);
+    localStorage.setItem("cursos", JSON.stringify(mis_cursos));
 
     let contenedor = document.getElementById("contenedor_cursos_precargados");
     
@@ -161,8 +222,11 @@ function agregarCurso(){
             </button>
         </div>
     </div>`;
+        localStorage.setItem("variable_para_abrir", "b");
         contenedor.append(div);
         limpiarDatos();
+        //console.log(mis_cursos);
+        //console.log(JSON.parse(localStorage.getItem("cursos")));
         escucharBotones();
 }
 
@@ -171,19 +235,6 @@ function limpiarDatos(){
     document.getElementById("precio_curso").value="";
     document.getElementById("descripcion_curso").value="";
     document.getElementById('imagen_curso').value="";
-
-    //limpiar variables
-    el_nombre_del_curso ="";
-    el_precio_del_curso ="";
-    la_descripcion_del_curso ="";
-    la_imagen_del_curso = "";    
-}
-
-
-
-function getNombreDeimagen(){
-    var nombre = document.getElementById('imagen_curso').files[0].name;
-    return nombre;
 }
 
 //CAPTURO EL BOTON PARA AGREGARLE EL EVENTO CLICK
@@ -197,15 +248,14 @@ boton_agregar_curso.addEventListener("click", () => agregarCurso());
 //ESTO ES PARA DESLOGUEAR
 
 const desloguear=()=>{
-    localStorage.clear();
-    window.open("../index.html", "_self");
+
+        let cursos_que_existian = JSON.parse(localStorage.getItem("cursos"));
+        localStorage.clear();
+        localStorage.setItem("variable_para_abrir", "a");
+        localStorage.setItem("cursos", JSON.stringify(cursos_que_existian));
+        window.open("../index.html", "_self");
 }
 
 const logout = document.getElementById("logout");
 
 logout.addEventListener("click", () => desloguear());
-
-/*
-    } else {
-       
-    } */

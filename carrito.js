@@ -87,7 +87,11 @@ document.getElementById("enviar_comprobante").addEventListener("click", () => en
 /*===========================================*/
 
 const desloguear=()=>{
+
+    let cursos_que_existian = JSON.parse(localStorage.getItem("cursos"));
     localStorage.clear();
+    localStorage.setItem("variable_para_abrir", "a");
+    localStorage.setItem("cursos", JSON.stringify(cursos_que_existian));
     window.open("../index.html", "_self");
 }
 
