@@ -27,7 +27,6 @@ main{
                     outline-color: rgb(248,193,28);
                     box-shadow: 2px 2px 2px rgb(248,193,28);
                 }
-
                 .datos_curso{
                     margin-top: 20px;
                     margin-left: 20px;
@@ -56,7 +55,10 @@ main{
                     color: #000;
                     font-family: Gotham-Medium,sans-serif;
                     font-size: 14px;
-                    
+                    display: none;
+                }
+                .el_id{
+                    display: none;
                 }
             }
         }

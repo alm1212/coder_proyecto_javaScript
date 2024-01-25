@@ -229,6 +229,9 @@ main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_texto
   font-family: Gotham-Medium, sans-serif;
   font-size: 14px;
 }
+main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_h1 .el_id {
+  display: none;
+}
 main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_ul {
   display: flex;
 }
@@ -452,6 +455,10 @@ main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_
   color: #000;
   font-family: Gotham-Medium, sans-serif;
   font-size: 14px;
+  display: none;
+}
+main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_h1 .el_id {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */

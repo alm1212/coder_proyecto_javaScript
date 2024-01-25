@@ -78,6 +78,7 @@ function agregarCurso(){
         </figure>
         <div class="main_disenno_flex_bloques_textos_h1">
             <h1>${el_nombre_del_curso}</h1>
+            <p id="curso_id" class="el_id">1</p>
         </div>
         <article class="main_disenno_flex_bloques_textos">
             <p><br>${la_descripcion_del_curso}</p>
