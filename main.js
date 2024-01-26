@@ -90,6 +90,7 @@ const verificarLogin = () =>{
     const usuario = localStorage.getItem("el_usuario");
     if (usuario === "estudiante") {
 
+        //document.getElementById("nuevos_cursos").style.display = 'none';
         document.getElementById("agregar_cursos1").style.display = 'none';
         document.getElementById("agregar_cursos2").style.display = 'none';
         
@@ -137,7 +138,7 @@ function Curso(id, imagen, nombre, descripcion, precio){
     this.precio = precio;
 }
 
-//let carrito=[];
+
 function agregarAlCarrito(id){
     
     let carrito = [];
@@ -159,13 +160,9 @@ function agregarAlCarrito(id){
 
 const escucharBotones =() =>{
     
-    
-    console.log(mis_cursos);
     mis_cursos.forEach((element) =>{
         let id=element.id;
-        console.log(id);
         let boton_agregar_al_carrito = document.getElementById(element.id);
-        console.log(boton_agregar_al_carrito.innerHTML);
         boton_agregar_al_carrito.addEventListener("click", ()=>agregarAlCarrito(element.id));
     })
 }
@@ -177,8 +174,13 @@ window.onload = cargarPagina();
 
 
 function getNombreDeimagen(){
-    var nombre = document.getElementById('imagen_curso').files[0].name;
-    return nombre;
+
+    if(document.getElementById('imagen_curso').files[0]){
+        var nombre = document.getElementById('imagen_curso').files[0].name;
+        return nombre;
+    }
+    alert("Para agregar un curso debe completar todos los datos");
+    limpiarDatos();
 }
 
 function agregarCurso(){
@@ -191,43 +193,47 @@ function agregarCurso(){
     let la_descripcion_del_curso = document.getElementById("descripcion_curso").value;
     let la_imagen_del_curso = getNombreDeimagen();
 
-    
-    let nuevo_id = mis_cursos.length + 1;
-    let nuevo_curso = new Curso(nuevo_id, la_imagen_del_curso, el_nombre_del_curso, la_descripcion_del_curso, el_precio_del_curso);
-    mis_cursos.push(nuevo_curso);
-    localStorage.setItem("cursos", JSON.stringify(mis_cursos));
-
-    let contenedor = document.getElementById("contenedor_cursos_precargados");
-    
-    let div = document.createElement("div");
-        div.innerHTML = 
-        `<div class="main_disenno_flex_bloques_tarjetas">
-        <figure class="main_disenno_flex_bloques_figure">
-            <img src="../images/cursos_precargados/${la_imagen_del_curso}" alt=${la_imagen_del_curso}>
-        </figure>
-        <div class="main_disenno_flex_bloques_textos_h1">
-            <h1>${el_nombre_del_curso}</h1>
-            <p id="curso_id" class="el_id">1</p>
-        </div>
-        <article class="main_disenno_flex_bloques_textos">
-            <p><br>${la_descripcion_del_curso}</p>
-            <div class="main_disenno_flex_bloques_textos_precio">
-                <h1><br>UYU</h1>
-                <h1 class="main_disenno_flex_bloques_textos_precio_valor"><br>${el_precio_del_curso}</h1>
-            </div>
-        </article>
-        <div class="main_disenno_flex_bloques_comprar">
-            <button id="${nuevo_id}" class="main_disenno_flex_bloques_boton">
-                <img src="../images/carrito_compras/carrito.png" alt="carrito">
-            </button>
-        </div>
-    </div>`;
-        localStorage.setItem("variable_para_abrir", "b");
-        contenedor.append(div);
+    if (!la_imagen_del_curso) {
+        //no hago nada porque ya se envió un alert en otra función
+    } else if(el_nombre_del_curso == "" || el_precio_del_curso == "" || la_descripcion_del_curso == ""){
+        alert("Para agregar un curso debe completar todos los datos");
         limpiarDatos();
-        //console.log(mis_cursos);
-        //console.log(JSON.parse(localStorage.getItem("cursos")));
-        escucharBotones();
+    } else {
+        let nuevo_id = mis_cursos.length + 1;
+        let nuevo_curso = new Curso(nuevo_id, la_imagen_del_curso, el_nombre_del_curso, la_descripcion_del_curso, el_precio_del_curso);
+        mis_cursos.push(nuevo_curso);
+        localStorage.setItem("cursos", JSON.stringify(mis_cursos));
+
+        let contenedor = document.getElementById("contenedor_cursos_precargados");
+        
+        let div = document.createElement("div");
+            div.innerHTML = 
+            `<div class="main_disenno_flex_bloques_tarjetas">
+            <figure class="main_disenno_flex_bloques_figure">
+                <img src="../images/cursos_precargados/${la_imagen_del_curso}" alt=${la_imagen_del_curso}>
+            </figure>
+            <div class="main_disenno_flex_bloques_textos_h1">
+                <h1>${el_nombre_del_curso}</h1>
+                <p id="curso_id" class="el_id">1</p>
+            </div>
+            <article class="main_disenno_flex_bloques_textos">
+                <p><br>${la_descripcion_del_curso}</p>
+                <div class="main_disenno_flex_bloques_textos_precio">
+                    <h1><br>UYU</h1>
+                    <h1 class="main_disenno_flex_bloques_textos_precio_valor"><br>${el_precio_del_curso}</h1>
+                </div>
+            </article>
+            <div class="main_disenno_flex_bloques_comprar">
+                <button id="${nuevo_id}" class="main_disenno_flex_bloques_boton">
+                    <img src="../images/carrito_compras/carrito.png" alt="carrito">
+                </button>
+            </div>
+        </div>`;
+            localStorage.setItem("variable_para_abrir", "b");
+            contenedor.append(div);
+            limpiarDatos();
+            escucharBotones();
+    }
 }
 
 function limpiarDatos(){

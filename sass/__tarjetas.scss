@@ -15,7 +15,7 @@ main{
                 width: 300px;
                 margin: 30px;
                 margin-top: 0px;
-                text-align: start;                
+                text-align: start;               
 
                 h4{
                     font-family: Gotham-Medium,sans-serif;
@@ -24,11 +24,12 @@ main{
                     font-weight: bold;
                 }
 
-                p, ul li{
+                p{
                     font-family: Gotham-Medium,sans-serif;
                     color: black;
-                    font-size: 14px;
-                    line-height: 16.8px;
+                    font-size: 20px;
+                    line-height: 20px;
+                    
                 }
             }
 
@@ -39,6 +40,8 @@ main{
                 margin: 10px;
                 max-width: 350px;
                 min-width: 350px;
+                min-height: 750px;
+                max-height: 750px;
                 border-radius: 14px;
                 background: #fff;
                 outline: 2px solid transparent;
@@ -90,7 +93,7 @@ main{
                     text-transform: uppercase;
                     color: #000;
                     font-family: Gotham-Medium,sans-serif;
-                    font-size: 14px;
+                    font-size: 24px;
                 }
                 .el_id{
                     display: none;

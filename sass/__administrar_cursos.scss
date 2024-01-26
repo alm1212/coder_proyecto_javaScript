@@ -16,8 +16,8 @@ main{
                 flex-direction: column;
                 gap: 0px;
                 margin: 10px;
-                max-width: 350px;
-                min-width: 350px;
+                max-width: 500px;
+                min-width: 500px;
                 border-radius: 14px;
                 background: #fff;
                 outline: 2px solid transparent;
@@ -38,6 +38,28 @@ main{
 
                     .contenedor_boton_agregar{
                         margin-bottom: 15px;
+                    }
+
+                    textarea{
+                        resize: none;
+                    }
+
+                    label{
+                        font-size: 24px;
+                        font-family: Gotham-Medium,sans-serif;                    
+                        color: black;
+                        font-weight: bold;
+                    }
+                    button, input{
+                        font-family: Gotham-Medium,sans-serif;
+                        font-size:22px;
+                        color: rgb(3, 3, 3);
+                        font-weight: bold;
+                        border-radius: 12px; 
+                        padding-top: 5px;
+                        padding-bottom: 8px;
+                        padding-right: 10px;
+                        padding-left: 10px;
                     }
                 }             
             }

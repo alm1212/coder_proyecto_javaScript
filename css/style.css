@@ -165,11 +165,11 @@ main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_texto
   color: black;
   font-weight: bold;
 }
-main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_textos p, main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_textos ul li {
+main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_textos p {
   font-family: Gotham-Medium, sans-serif;
   color: black;
-  font-size: 14px;
-  line-height: 16.8px;
+  font-size: 20px;
+  line-height: 20px;
 }
 main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjetas {
   display: flex;
@@ -178,6 +178,8 @@ main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_tarje
   margin: 10px;
   max-width: 350px;
   min-width: 350px;
+  min-height: 750px;
+  max-height: 750px;
   border-radius: 14px;
   background: #fff;
   outline: 2px solid transparent;
@@ -228,7 +230,7 @@ main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_texto
   text-transform: uppercase;
   color: #000;
   font-family: Gotham-Medium, sans-serif;
-  font-size: 14px;
+  font-size: 24px;
 }
 main .main_servicios .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_h1 .el_id {
   display: none;
@@ -257,20 +259,34 @@ main .main_carrito .main_disenno_flex_bloques {
 main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos {
   width: 300px;
   margin: 30px;
-  margin-top: 0px;
+  margin-bottom: 10px;
+  margin-left: 8px;
   text-align: start;
 }
 main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos h4 {
   font-family: Gotham-Medium, sans-serif;
-  font-size: 18px;
+  font-size: 22px;
   color: black;
   font-weight: bold;
 }
 main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos p, main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos ul li {
   font-family: Gotham-Medium, sans-serif;
   color: black;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 16.8px;
+}
+main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos .main_disenno_flex_bloques_boton {
+  width: 50px;
+  height: 40px;
+  margin-left: 0px;
+  background-color: rgb(248, 193, 28);
+  border-radius: 15px;
+}
+main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos .main_disenno_flex_bloques_boton img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5%;
 }
 main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjetas {
   display: flex;
@@ -306,17 +322,6 @@ main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjeta
   margin-top: auto;
   margin-bottom: 10px;
 }
-main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjetas .main_disenno_flex_bloques_comprar .main_disenno_flex_bloques_boton {
-  width: 50px;
-  height: 40px;
-  background-color: rgb(248, 193, 28);
-}
-main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjetas .main_disenno_flex_bloques_comprar .main_disenno_flex_bloques_boton img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 5%;
-}
 main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_h1 {
   width: 100%;
   height: 42px;
@@ -329,7 +334,7 @@ main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_
   text-transform: uppercase;
   color: #000;
   font-family: Gotham-Medium, sans-serif;
-  font-size: 14px;
+  font-size: 20px;
 }
 main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_ul {
   display: flex;
@@ -339,8 +344,7 @@ main .main_carrito .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_
   gap: 10px;
   font-family: Gotham-Medium, sans-serif;
   color: black;
-  font-size: 20px;
-  margin-top: 20px;
+  font-size: 30px;
 }
 main .contenedor_principal_pago {
   margin-top: 50px;
@@ -351,7 +355,7 @@ main .contenedor_principal_pago {
   justify-content: center;
 }
 main .contenedor_principal_pago .contenedor_principal_pago_datos {
-  width: 600px;
+  width: 700px;
   gap: 12px;
   display: flex;
   flex-direction: column;
@@ -388,7 +392,7 @@ main .contenedor_principal_pago .contenedor_principal_pago_datos input {
   margin-right: 50px;
   border-radius: 8px;
 }
-main .contenedor_principal_pago .contenedor_principal_pago_datos .boton {
+main .contenedor_principal_pago .contenedor_principal_pago_datos .boton, main .contenedor_principal_pago .contenedor_principal_pago_datos .boton_comprobante, main .contenedor_principal_pago .contenedor_principal_pago_datos .boton_enviar {
   margin-top: auto;
   margin-bottom: auto;
   margin-left: auto;
@@ -397,10 +401,15 @@ main .contenedor_principal_pago .contenedor_principal_pago_datos .boton {
   padding-right: 20px;
   padding-left: 20px;
   font-family: Gotham-Medium, sans-serif;
-  font-size: 18px;
-  color: black;
+  font-size: 22px;
+  color: rgb(3, 3, 3);
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 15px;
+}
+main .contenedor_principal_pago .contenedor_principal_pago_datos .boton_enviar {
+  color: #fff;
+  background-color: #000;
+  border-color: #000;
 }
 
 main .main_agregar_cursos {
@@ -418,8 +427,8 @@ main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_
   flex-direction: column;
   gap: 0px;
   margin: 10px;
-  max-width: 350px;
-  min-width: 350px;
+  max-width: 500px;
+  min-width: 500px;
   border-radius: 14px;
   background: #fff;
   outline: 2px solid transparent;
@@ -441,6 +450,26 @@ main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_
 }
 main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjetas .datos_curso .contenedor_boton_agregar {
   margin-bottom: 15px;
+}
+main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjetas .datos_curso textarea {
+  resize: none;
+}
+main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjetas .datos_curso label {
+  font-size: 24px;
+  font-family: Gotham-Medium, sans-serif;
+  color: black;
+  font-weight: bold;
+}
+main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjetas .datos_curso button, main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_tarjetas .datos_curso input {
+  font-family: Gotham-Medium, sans-serif;
+  font-size: 22px;
+  color: rgb(3, 3, 3);
+  font-weight: bold;
+  border-radius: 12px;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 main .main_agregar_cursos .main_disenno_flex_bloques .main_disenno_flex_bloques_textos_h1 {
   width: 100%;

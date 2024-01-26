@@ -31,7 +31,7 @@ const loguear=()=>{
         localStorage.setItem("el_usuario", "administrador");
         //alert("administrador");
     } else {
-        alert("Usuario o contraseña incorrecta")
+        alert("Usuario o contraseña incorrecta");
     }
 }
 
