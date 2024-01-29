@@ -73,22 +73,59 @@ window.onload = leerLocalStorage();
 
 
 /*======================================================*/
-/*======STO ES PARA ENVIAR COMPROBANTE DE PAGO==========*/
+/*======ESTO ES PARA ENVIAR COMPROBANTE DE PAGO==========*/
 /*======================================================*/
 
-const enviarComprobante=()=>{    
+const enviarComprobante=()=>{   
+    
+    let longitud;
 
-    if(document.getElementById("comprobante").value){
-        
-        document.getElementById("comprobante").value="";  
-        document.getElementById("total").innerHTML = "";
-        let carrito = [];
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-        alert("Hemos recibido su comprobante -  Nos contactaremos con usted por correo");
-        window.location.reload();
+    
+    if(JSON.parse(localStorage.getItem("carrito"))){
+        longitud = JSON.parse(localStorage.getItem("carrito")).length;
+        console.log(longitud);
+    }
+
+    if (longitud >0) {
+        if(document.getElementById("comprobante").value){
+            document.getElementById("comprobante").value="";  
+            document.getElementById("total").innerHTML = "";
+            let carrito = [];
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Hemos recibido su comprobante -  Nos contactaremos con usted por correo",
+                showConfirmButton: true,
+                confirmButtonText : "Entendido"            
+              }).then ((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+              })
+        } else {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Debe adjuntar el comprobante de su pago",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            window.location.reload;
+        }
     } else {
-        alert("Debe adjuntar el comprobante de su pago");  
-    }   
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Usted no tiene productos en su carrito",
+            showConfirmButton: true,
+            confirmButtonText : "Entendido"            
+          }).then ((result) => {
+            if (result.isConfirmed) {
+                window.location.reload();
+            }
+          })     
+    }
 }
 
 document.getElementById("enviar_comprobante").addEventListener("click", () => enviarComprobante());
@@ -105,7 +142,18 @@ function eliminarDelCarrito(id){
     
     carrito.splice(id, 1); 
     localStorage.setItem("carrito", JSON.stringify(carrito));
-    window.location.reload();   
+    document.getElementById("comprobante").value="";  
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Listo -  Curso eliminado",
+        showConfirmButton: true,
+        confirmButtonText : "Entendido"            
+      }).then ((result) => {
+        if (result.isConfirmed) {
+           window.location.reload();
+        }
+      })   
     localStorage.setItem("variable_para_abrir", "b");
 }
 
@@ -121,13 +169,7 @@ const escucharBotones =() =>{
         //boton_eliminar_del_carrito.addEventListener("click", ()=>console.log(index));
         boton_eliminar_del_carrito.addEventListener("click", () => eliminarDelCarrito(index));
     }
-
-    // carrito_actual.forEach(() =>{
-    //     let boton_eliminar_del_carrito = document.getElementById(`el${id}`);
-    //     //boton_eliminar_del_carrito.addEventListener("click", ()=>eliminarDelCarrito(id));
-    //     boton_eliminar_del_carrito.addEventListener("click", ()=>console.log(id));
-        
-    // })
+    
 }
 
 

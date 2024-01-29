@@ -250,6 +250,7 @@ main .main_carrito {
   display: flex;
   flex-direction: column;
   margin: 30px;
+  margin-top: 80px;
 }
 main .main_carrito .main_disenno_flex_bloques {
   display: flex;

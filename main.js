@@ -179,8 +179,18 @@ function getNombreDeimagen(){
         var nombre = document.getElementById('imagen_curso').files[0].name;
         return nombre;
     }
-    alert("Para agregar un curso debe completar todos los datos");
-    limpiarDatos();
+    Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Para agregar un curso debe completar todos los datos -  Por favor verifique",
+        showConfirmButton: true,
+        confirmButtonText : "Entendido"            
+      }).then ((result) => {
+        if (result.isConfirmed) {
+           // limpiarDatos();
+        }
+      })
+    
 }
 
 function agregarCurso(){
@@ -196,8 +206,17 @@ function agregarCurso(){
     if (!la_imagen_del_curso) {
         //no hago nada porque ya se envió un alert en otra función
     } else if(el_nombre_del_curso == "" || el_precio_del_curso == "" || la_descripcion_del_curso == ""){
-        alert("Para agregar un curso debe completar todos los datos");
-        limpiarDatos();
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Para agregar un curso debe completar todos los datos -  Por favor verifique",
+            showConfirmButton: true,
+            confirmButtonText : "Entendido"            
+          }).then ((result) => {
+            if (result.isConfirmed) {
+               // limpiarDatos();
+            }
+          })
     } else {
         let nuevo_id = mis_cursos.length + 1;
         let nuevo_curso = new Curso(nuevo_id, la_imagen_del_curso, el_nombre_del_curso, la_descripcion_del_curso, el_precio_del_curso);
@@ -233,6 +252,17 @@ function agregarCurso(){
             contenedor.append(div);
             limpiarDatos();
             escucharBotones();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Listo -  Curso agregado",
+                showConfirmButton: true,
+                confirmButtonText : "Entendido"            
+              }).then ((result) => {
+                if (result.isConfirmed) {
+                   // limpiarDatos();
+                }
+              })
     }
 }
 
