@@ -1,16 +1,16 @@
-
 /*===========================================================================================*/
 /*======================================BASE DE DATOS========================================*/
 /*===========================================================================================*/
 
-let mis_cursos = [
-    /*id, imagen, nombre, descripcion, precio*/
-    {id:1, imagen:"html.webp", nombre:"HTML 5", descripcion:"El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para estructurar y desplegar una página web y sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con viñetas, o imágenes y tablas de datos.", precio:5200},
-    {id:2, imagen:"css.jpg", nombre:"CSS", descripcion:"CSS son las siglas en inglés para «hojas de estilo en cascada» (Cascading Style Sheets). Básicamente, es un lenguaje que maneja el diseño y presentación de las páginas web, es decir, cómo lucen cuando un usuario las visita. Funciona junto con el lenguaje HTML que se encarga del contenido básico de los sitios.", precio:4100},
-    {id:3, imagen:"javascript.jpg", nombre:"JAVASCRIPT", descripcion:"JavaScript es un lenguaje de programación que los desarrolladores utilizan para hacer páginas web interactivas. Desde actualizar fuentes de redes sociales a mostrar animaciones y mapas interactivos, las funciones de JavaScript pueden mejorar la experiencia del usuario de un sitio web.", precio:3200},
-    {id:4, imagen:"react.png", nombre:"REACT", descripcion:"React (también llamada React. js o ReactJS) es una librería Javascript de código abierto diseñada para crear interfaces de usuario con el objetivo de facilitar el desarrollo de aplicaciones en una sola página. Es mantenido por Facebook y la comunidad de software libre.", precio:4500},
-]
+// let mis_cursos = [
+//     /*id, imagen, nombre, descripcion, precio*/
+//     {id:1, imagen:"html.webp", nombre:"HTML 5", descripcion:"El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para estructurar y desplegar una página web y sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con viñetas, o imágenes y tablas de datos.", precio:5200},
+//     {id:2, imagen:"css.jpg", nombre:"CSS", descripcion:"CSS son las siglas en inglés para «hojas de estilo en cascada» (Cascading Style Sheets). Básicamente, es un lenguaje que maneja el diseño y presentación de las páginas web, es decir, cómo lucen cuando un usuario las visita. Funciona junto con el lenguaje HTML que se encarga del contenido básico de los sitios.", precio:4100},
+//     {id:3, imagen:"javascript.jpg", nombre:"JAVASCRIPT", descripcion:"JavaScript es un lenguaje de programación que los desarrolladores utilizan para hacer páginas web interactivas. Desde actualizar fuentes de redes sociales a mostrar animaciones y mapas interactivos, las funciones de JavaScript pueden mejorar la experiencia del usuario de un sitio web.", precio:3200},
+//     {id:4, imagen:"react.png", nombre:"REACT", descripcion:"React (también llamada React. js o ReactJS) es una librería Javascript de código abierto diseñada para crear interfaces de usuario con el objetivo de facilitar el desarrollo de aplicaciones en una sola página. Es mantenido por Facebook y la comunidad de software libre.", precio:4500},
+// ]
 
+let mis_cursos = [];
 
 
 /*===========================================================================================*/
@@ -47,6 +47,7 @@ const cargarCursos = () =>{
         </div>`;
             contenedor.append(div);
         })
+        console.log(mis_cursos); 
         localStorage.setItem("cursos", JSON.stringify(mis_cursos));
 }
 
@@ -103,19 +104,29 @@ const verificarLogin = () =>{
 //ESTO ES LO QUE QUIERO QUE PASE CUANDO SE ABRA LA PÁGINA
 
 const cargarPagina = () =>{
-
-    if (localStorage.getItem("cursos")) {
-        verificarLogin();
-        mis_cursos = JSON.parse(localStorage.getItem("cursos"));
-        cargarCursosPrecargados();
-        escucharBotones();
-        //variable_para_controlar_carga_de_datos = "b";
-    } else {
-        verificarLogin();
-        cargarCursos();
-        escucharBotones();
-        //variable_para_controlar_carga_de_datos = "b";
-    }   
+    console.log("Hola voy a cargar la pagina");
+    console.log(mis_cursos);
+    setTimeout(() => {
+        if (localStorage.getItem("cursos")) {
+            verificarLogin();
+            mis_cursos = JSON.parse(localStorage.getItem("cursos"));
+            console.log("Hola voy a cargar la pagina tengo cursos en el local storage");
+            console.log(mis_cursos);
+            cargarCursosPrecargados();
+            escucharBotones();
+            //variable_para_controlar_carga_de_datos = "b";
+        } else {
+            verificarLogin();
+            console.log("Hola voy a cargar la pagina NOOOOOOOOOOOOO tengo cursos en el local storage");
+            console.log(mis_cursos);
+            cargarCursos();
+            escucharBotones();
+            //variable_para_controlar_carga_de_datos = "b";
+        }  
+    }, 200);  
+    
+    //NOTA IMPORTANTE, SI AL ABRIR LA PÁGINA NO APARECEN LOR CURSO HAY QUE AUMENTAR EL INTERVALO ANTERIOR
+    //PARA DAR TIEMPO A QUE SE CARGA EL ARREGLO mis_cursos (NOTA: ESTE ARREGLO SE LLENA CON EL FETC LEYENDO EL ARCHIVO data.json)
 }
 
 //ESTO ES PARA AGREGAR UN ELEMENTO AL CARRITO
@@ -295,3 +306,11 @@ const desloguear=()=>{
 const logout = document.getElementById("logout");
 
 logout.addEventListener("click", () => desloguear());
+fetch("./data.json")
+    .then((response) => response.json())
+    .then((response) =>{
+        console.log(mis_cursos);
+        mis_cursos = response;
+        console.log(mis_cursos);
+        console.log(response[0]);       
+})
