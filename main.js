@@ -103,6 +103,37 @@ const verificarLogin = () =>{
 
 //ESTO ES LO QUE QUIERO QUE PASE CUANDO SE ABRA LA PÁGINA
 
+const cargarPagina = async() =>{
+
+    try {
+
+        const response = await fetch("./data.json");
+        mis_cursos = await response.json();
+
+        if (localStorage.getItem("cursos")) {
+            verificarLogin();
+            mis_cursos = JSON.parse(localStorage.getItem("cursos"));
+            console.log("Hola voy a cargar la pagina tengo cursos en el local storage");
+            console.log(mis_cursos);
+            cargarCursosPrecargados();
+            escucharBotones();
+            //variable_para_controlar_carga_de_datos = "b";
+        } else {
+            verificarLogin();
+            console.log("Hola voy a cargar la pagina NOOOOOOOOOOOOO tengo cursos en el local storage");
+            console.log(mis_cursos);
+            cargarCursos();
+            escucharBotones();
+            //variable_para_controlar_carga_de_datos = "b";
+        } 
+        
+    } catch (error) {
+        console.log("Hubo un error, recargue la página");
+    }
+    
+        
+}
+/*
 const cargarPagina = () =>{
     console.log("Hola voy a cargar la pagina");
     console.log(mis_cursos);
@@ -127,7 +158,7 @@ const cargarPagina = () =>{
     
     //NOTA IMPORTANTE, SI AL ABRIR LA PÁGINA NO APARECEN LOR CURSO HAY QUE AUMENTAR EL INTERVALO ANTERIOR
     //PARA DAR TIEMPO A QUE SE CARGA EL ARREGLO mis_cursos (NOTA: ESTE ARREGLO SE LLENA CON EL FETC LEYENDO EL ARCHIVO data.json)
-}
+}*/
 
 //ESTO ES PARA AGREGAR UN ELEMENTO AL CARRITO
 
@@ -306,6 +337,7 @@ const desloguear=()=>{
 const logout = document.getElementById("logout");
 
 logout.addEventListener("click", () => desloguear());
+/*
 fetch("./data.json")
     .then((response) => response.json())
     .then((response) =>{
@@ -313,4 +345,4 @@ fetch("./data.json")
         mis_cursos = response;
         console.log(mis_cursos);
         console.log(response[0]);       
-})
+})*/
