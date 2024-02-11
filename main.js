@@ -1,14 +1,8 @@
 /*===========================================================================================*/
 /*======================================BASE DE DATOS========================================*/
 /*===========================================================================================*/
-
-// let mis_cursos = [
-//     /*id, imagen, nombre, descripcion, precio*/
-//     {id:1, imagen:"html.webp", nombre:"HTML 5", descripcion:"El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para estructurar y desplegar una página web y sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con viñetas, o imágenes y tablas de datos.", precio:5200},
-//     {id:2, imagen:"css.jpg", nombre:"CSS", descripcion:"CSS son las siglas en inglés para «hojas de estilo en cascada» (Cascading Style Sheets). Básicamente, es un lenguaje que maneja el diseño y presentación de las páginas web, es decir, cómo lucen cuando un usuario las visita. Funciona junto con el lenguaje HTML que se encarga del contenido básico de los sitios.", precio:4100},
-//     {id:3, imagen:"javascript.jpg", nombre:"JAVASCRIPT", descripcion:"JavaScript es un lenguaje de programación que los desarrolladores utilizan para hacer páginas web interactivas. Desde actualizar fuentes de redes sociales a mostrar animaciones y mapas interactivos, las funciones de JavaScript pueden mejorar la experiencia del usuario de un sitio web.", precio:3200},
-//     {id:4, imagen:"react.png", nombre:"REACT", descripcion:"React (también llamada React. js o ReactJS) es una librería Javascript de código abierto diseñada para crear interfaces de usuario con el objetivo de facilitar el desarrollo de aplicaciones en una sola página. Es mantenido por Facebook y la comunidad de software libre.", precio:4500},
-// ]
+/* SI EL LOCALSTORAGE NO TIENE CURSOS ESTE LISTADO DE CURSOS SE LLENA LEYENDO EL ARCHIVO data.json */
+/* EL ARCHIVO data.json ESTÁ EN LA CARPETA pages  */
 
 let mis_cursos = [];
 
@@ -51,6 +45,8 @@ const cargarCursos = () =>{
         localStorage.setItem("cursos", JSON.stringify(mis_cursos));
 }
 
+//FUNCIÓN PARA CARGAR LOS CURSOS DESDE EL LOCALSTORAGE
+
 const cargarCursosPrecargados = () =>{
     console.log("hello");
     let contenedor = document.getElementById("contenedor_cursos_precargados");
@@ -91,7 +87,6 @@ const verificarLogin = () =>{
     const usuario = localStorage.getItem("el_usuario");
     if (usuario === "estudiante") {
 
-        //document.getElementById("nuevos_cursos").style.display = 'none';
         document.getElementById("agregar_cursos1").style.display = 'none';
         document.getElementById("agregar_cursos2").style.display = 'none';
         
@@ -102,6 +97,10 @@ const verificarLogin = () =>{
 }
 
 //ESTO ES LO QUE QUIERO QUE PASE CUANDO SE ABRA LA PÁGINA
+//AQUÍ ESTÁ APLICADO EL FETCH
+//LOS DATOS DE LOS CURSO SE ENCUENTRAN EN EL ARCHIVO "data.json" QUE ESTÁ EN LA CARPETA pages
+//SI PONÍA ESTE ARCHIVO SUELTO EN LA RAÍZ NO EM FUNCIONABA Y EN LA CONSOLA ME MOSTRABA QUE NO SE ESTABA ENCONTRANDO
+//EL ARCHIVO DENTRO DE pages, ASÍ QUE LO UBIQUÉ EN ESA CARPETA Y FUNCIONÓ
 
 const cargarPagina = async() =>{
 
@@ -113,18 +112,14 @@ const cargarPagina = async() =>{
         if (localStorage.getItem("cursos")) {
             verificarLogin();
             mis_cursos = JSON.parse(localStorage.getItem("cursos"));
-            console.log("Hola voy a cargar la pagina tengo cursos en el local storage");
             console.log(mis_cursos);
             cargarCursosPrecargados();
             escucharBotones();
-            //variable_para_controlar_carga_de_datos = "b";
         } else {
             verificarLogin();
-            console.log("Hola voy a cargar la pagina NOOOOOOOOOOOOO tengo cursos en el local storage");
             console.log(mis_cursos);
             cargarCursos();
             escucharBotones();
-            //variable_para_controlar_carga_de_datos = "b";
         } 
         
     } catch (error) {
@@ -132,43 +127,6 @@ const cargarPagina = async() =>{
     }
     
         
-}
-/*
-const cargarPagina = () =>{
-    console.log("Hola voy a cargar la pagina");
-    console.log(mis_cursos);
-    setTimeout(() => {
-        if (localStorage.getItem("cursos")) {
-            verificarLogin();
-            mis_cursos = JSON.parse(localStorage.getItem("cursos"));
-            console.log("Hola voy a cargar la pagina tengo cursos en el local storage");
-            console.log(mis_cursos);
-            cargarCursosPrecargados();
-            escucharBotones();
-            //variable_para_controlar_carga_de_datos = "b";
-        } else {
-            verificarLogin();
-            console.log("Hola voy a cargar la pagina NOOOOOOOOOOOOO tengo cursos en el local storage");
-            console.log(mis_cursos);
-            cargarCursos();
-            escucharBotones();
-            //variable_para_controlar_carga_de_datos = "b";
-        }  
-    }, 200);  
-    
-    //NOTA IMPORTANTE, SI AL ABRIR LA PÁGINA NO APARECEN LOR CURSO HAY QUE AUMENTAR EL INTERVALO ANTERIOR
-    //PARA DAR TIEMPO A QUE SE CARGA EL ARREGLO mis_cursos (NOTA: ESTE ARREGLO SE LLENA CON EL FETC LEYENDO EL ARCHIVO data.json)
-}*/
-
-//ESTO ES PARA AGREGAR UN ELEMENTO AL CARRITO
-
-//AGREGAR AL CARRITO
-
-//FUNCION PARA ABREVIATURA DE CURSOS PARA EL CARRITO
-function Curso(pnombre_curso, pimagen, pprecio){
-    this.nombre_curso = pnombre_curso,
-    this.imagen = pimagen,
-    this.precio = pprecio
 }
 
 //FUNCION PARA CREAR CURSOS
@@ -180,7 +138,7 @@ function Curso(id, imagen, nombre, descripcion, precio){
     this.precio = precio;
 }
 
-
+//FUNCION PARA AGREGAR UN CURSO AL CARRITO
 function agregarAlCarrito(id){
     
     let carrito = [];
@@ -218,7 +176,7 @@ window.onload = cargarPagina();
 function getNombreDeimagen(){
 
     if(document.getElementById('imagen_curso').files[0]){
-        var nombre = document.getElementById('imagen_curso').files[0].name;
+        let nombre = document.getElementById('imagen_curso').files[0].name;
         return nombre;
     }
     Swal.fire({
@@ -337,6 +295,8 @@ const desloguear=()=>{
 const logout = document.getElementById("logout");
 
 logout.addEventListener("click", () => desloguear());
+
+
 /*
 fetch("./data.json")
     .then((response) => response.json())
